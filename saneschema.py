@@ -84,7 +84,7 @@ class Schema:
 
   def __check_string(self, checked, unchecked):
     result = re.search(checked, unchecked)
-    if (result in None):
+    if (result is None):
       raise SchemaCheckError()
 
   def __check_number(self, checked, unchecked):
