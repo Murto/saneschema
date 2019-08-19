@@ -3,7 +3,9 @@ import json
 import re
 
 class SchemaCheckError(BaseException):
-  pass
+  
+  def __init__(self, msg):
+    self.msg = msg
 
 class Schema:
 
@@ -52,7 +54,7 @@ class Schema:
         self._logger.error('Unknown type. Please contact the package maintainer')
     else:
       self._logger.info('JSON failed check')
-      raise SchemaCheckError()
+      raise SchemaCheckError('JSON failed check')
 
   def __check_class(self, checked, unchecked):
     for field in unchecked:
@@ -61,13 +63,13 @@ class Schema:
         result = re.search(pattern, field)
         if (not result is None):
           try:
-            self.__check(checked[pattern], unchecked)
+            self.__check(checked[pattern], unchecked[field])
             field_checked = True
             break
           except SchemaCheckError:
             continue
       if (field_checked == False):
-        raise SchemaCheckError()
+        raise SchemaCheckError(f'Field "{field}" did not pass check')
 
   def __check_array(self, checked, unchecked):
     for item in unchecked:
@@ -80,12 +82,12 @@ class Schema:
         except SchemaCheckError:
           continue
       if (item_checked == False):
-        raise SchemaCheckError()
+        raise SchemaCheckError('Item did not pass check')
 
   def __check_string(self, checked, unchecked):
     result = re.search(checked, unchecked)
     if (result is None):
-      raise SchemaCheckError()
+      raise SchemaCheckError(f'String "{unchecked}" did not pass check')
 
   def __check_number(self, checked, unchecked):
     pass
