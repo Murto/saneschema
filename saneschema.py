@@ -30,64 +30,22 @@ class Schema:
       raise
     except:
       self._logger.error('An unknown error occurred')
+      raise
 
   def check(self, unchecked):
-    self.__check(self._schema, unchecked)
+    pass
 
   def __check(self, checked, unchecked):
-    checked_type = type(checked)
-    unchecked_type = type(unchecked)
-    if (checked_type == unchecked_type):
-      if (checked_type == Schema.OBJECT_TYPE):
-        self.__check_class(checked, unchecked)
-      elif (checked_type == Schema.ARRAY_TYPE):
-        self.__check_array(checked, unchecked)
-      elif (checked_type == Schema.STRING_TYPE):
-        self.__check_string(checked, unchecked)
-      elif (checked_type in (Schema.INT_TYPE, Schema.FLOAT_TYPE)):
-        self.__check_number(checked, unchecked)
-      elif (checked_type == Schema.BOOLEAN_TYPE):
-        self.__check_boolean(checked, unchecked)
-      elif (checked_type == Schema.NULL_TYPE):
-        self.__check_null(checked, unchecked)
-      else:
-        self._logger.error('Unknown type. Please contact the package maintainer')
-    else:
-      self._logger.info('JSON failed check')
-      raise SchemaCheckError('JSON failed check')
+    pass
 
   def __check_class(self, checked, unchecked):
-    for field in unchecked:
-      field_checked = False
-      for pattern in checked:
-        result = re.search(pattern, field)
-        if (not result is None):
-          try:
-            self.__check(checked[pattern], unchecked[field])
-            field_checked = True
-            break
-          except SchemaCheckError:
-            continue
-      if (field_checked == False):
-        raise SchemaCheckError(f'Field "{field}" did not pass check')
+    pass
 
   def __check_array(self, checked, unchecked):
-    for item in unchecked:
-      item_checked = False
-      for example in checked:
-        try:
-          self.__check(example, item)
-          item_checked = True
-          break
-        except SchemaCheckError:
-          continue
-      if (item_checked == False):
-        raise SchemaCheckError('Item did not pass check')
+    pass
 
   def __check_string(self, checked, unchecked):
-    result = re.search(checked, unchecked)
-    if (result is None):
-      raise SchemaCheckError(f'String "{unchecked}" did not pass check')
+    pass
 
   def __check_number(self, checked, unchecked):
     pass
