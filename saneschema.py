@@ -36,17 +36,17 @@ class Schema:
     checked_type = type(checked)
     unchecked_type = type(unchecked)
     if (checked_type == unchecked_type):
-      if (checked_type == OBJECT_TYPE):
+      if (checked_type == Schema.OBJECT_TYPE):
         self.__check_class(checked, unchecked)
-      elif (checked_type == ARRAY_TYPE):
+      elif (checked_type == Schema.ARRAY_TYPE):
         self.__check_array(checked, unchecked)
-      elif (checked_type == STRING_TYPE):
+      elif (checked_type == Schema.STRING_TYPE):
         self.__check_string(checked, unchecked)
-      elif (checked_type in (INT_TYPE, FLOAT_TYPE)):
+      elif (checked_type in (Schema.INT_TYPE, Schema.FLOAT_TYPE)):
         self.__check_number(checked, unchecked)
-      elif (checked_type == BOOLEAN_TYPE):
+      elif (checked_type == Schema.BOOLEAN_TYPE):
         self.__check_boolean(checked, unchecked)
-      elif (checked_type == NULL_TYPE):
+      elif (checked_type == Schema.NULL_TYPE):
         self.__check_null(checked_unchecked)
       else:
         self._logger.error('Unknown type. Please contact the package maintainer')
