@@ -2,7 +2,7 @@ import logging
 import json
 import re
 
-class SchemaCheckError:
+class SchemaCheckError(BaseException):
   pass
 
 class Schema:
