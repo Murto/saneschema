@@ -47,7 +47,7 @@ class Schema:
       elif (checked_type == Schema.BOOLEAN_TYPE):
         self.__check_boolean(checked, unchecked)
       elif (checked_type == Schema.NULL_TYPE):
-        self.__check_null(checked_unchecked)
+        self.__check_null(checked, unchecked)
       else:
         self._logger.error('Unknown type. Please contact the package maintainer')
     else:
