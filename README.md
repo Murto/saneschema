@@ -22,6 +22,6 @@ The following commands assume that python 3 is your default version of python an
 ```bash
 git clone https://github.com/Murto/saneschema.git
 cd saneschema
-python3 setup.py
+python setup.py
 pip dist/saneschema-2.0-py3-none-any.whl
 ```
