@@ -8,7 +8,7 @@ import unittest
 
 DIR = os.path.dirname(os.path.abspath(__file__)) 
 
-class TestBasicTypeCheck(unittest.TestCase):
+class TestJex(unittest.TestCase):
 
   def test_object(self):
     SCHEMA_FILE = 'jex_object_schema.json'
