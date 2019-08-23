@@ -11,33 +11,33 @@ DIR = os.path.dirname(os.path.abspath(__file__))
 class TestBasicTypeCheck(unittest.TestCase):
 
   def test_object(self):
-    SCHEMA_FILE = 'basic_object_schema.json'
-    UNCHECKED_FILE = 'basic_object.json'
+    SCHEMA_FILE = 'jex_object_schema.json'
+    UNCHECKED_FILE = 'object.json'
     self.do_check(SCHEMA_FILE, UNCHECKED_FILE)
 
   def test_array(self):
-    SCHEMA_FILE = 'basic_array_schema.json'
-    UNCHECKED_FILE = 'basic_array.json'
+    SCHEMA_FILE = 'jex_array_schema.json'
+    UNCHECKED_FILE = 'array.json'
     self.do_check(SCHEMA_FILE, UNCHECKED_FILE)
 
   def test_string(self):
-    SCHEMA_FILE = 'basic_string_schema.json'
-    UNCHECKED_FILE = 'basic_string.json'
+    SCHEMA_FILE = 'jex_string_schema.json'
+    UNCHECKED_FILE = 'string.json'
     self.do_check(SCHEMA_FILE, UNCHECKED_FILE)
 
   def test_number(self):
-    SCHEMA_FILE = 'basic_number_schema.json'
-    UNCHECKED_FILE = 'basic_number.json'
+    SCHEMA_FILE = 'jex_number_schema.json'
+    UNCHECKED_FILE = 'number.json'
     self.do_check(SCHEMA_FILE, UNCHECKED_FILE)
 
   def test_boolean(self):
-    SCHEMA_FILE = 'basic_boolean_schema.json'
-    UNCHECKED_FILE = 'basic_boolean.json'
+    SCHEMA_FILE = 'jex_boolean_schema.json'
+    UNCHECKED_FILE = 'boolean.json'
     self.do_check(SCHEMA_FILE, UNCHECKED_FILE)
 
   def test_null(self):
-    SCHEMA_FILE = 'basic_null_schema.json'
-    UNCHECKED_FILE = 'basic_null.json'
+    SCHEMA_FILE = 'jex_null_schema.json'
+    UNCHECKED_FILE = 'null.json'
     self.do_check(SCHEMA_FILE, UNCHECKED_FILE)
 
   def do_check(self, schema_file, unchecked_file):
