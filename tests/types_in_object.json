@@ -1,7 +1,7 @@
 {
   "object": {},
   "array": [],
-  "string": ".*",
+  "string": "string",
   "number": 0,
   "boolean": true,
   "null": null
