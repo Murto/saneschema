@@ -7,7 +7,8 @@ import re
 
 # Error class used for all exceptions from the package
 class SchemaCheckError(BaseException):
-  
+  """saneschema error class."""
+
   def __init__(self, msg):
     """Initialise with a given message."""
     super().__init__(msg)
@@ -15,6 +16,7 @@ class SchemaCheckError(BaseException):
 
 
 class Schema:
+  """saneschema JSON schema."""
 
   OBJECT_TYPE  = type(json.loads('{}'))
   ARRAY_TYPE   = type(json.loads('[]'))
