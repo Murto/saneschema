@@ -16,6 +16,10 @@ import os
 import sys
 sys.path.insert(0, os.path.abspath('..'))
 
+# -- Theming setup -----------------------------------------------------------
+
+import sphinx_rtd_theme
+
 
 # -- Project information -----------------------------------------------------
 
@@ -47,7 +51,10 @@ extensions = [
     'sphinx.ext.ifconfig',
     'sphinx.ext.viewcode',
     'sphinx.ext.githubpages',
+    'sphinx_rtd_theme'
 ]
+
+html_theme = 'sphinx_rtd_theme'
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
