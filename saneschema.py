@@ -7,6 +7,7 @@ import re
 class SchemaCheckError(BaseException):
   
   def __init__(self, msg):
+    super().__init__(msg)
     self.msg = msg
 
 
