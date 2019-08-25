@@ -20,8 +20,6 @@ Indices and tables
 * :ref:`search`
 
 
-Testing
-=======
 
 .. automodule:: saneschema
    :members:
