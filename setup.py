@@ -5,7 +5,7 @@ with open('README.md', 'r') as f:
 
 setuptools.setup(
   name='saneschema',
-  version='2.1',
+  version='2.2',
   scripts=['saneschema.py'],
   author='Murray Steele',
   author_email='contact@murto.dev',
