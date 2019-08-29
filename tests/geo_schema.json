@@ -1,0 +1,6 @@
+{
+  "type": "$string",
+  "geometries": [
+    "{\"type\":\"$string\",\"coordinates\":[\"$number\",\"[\\\"$number\\\"]\"]}"
+  ]
+}
