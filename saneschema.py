@@ -18,13 +18,13 @@ class SchemaCheckError(BaseException):
 class Schema:
   """saneschema JSON schema."""
 
-  OBJECT_TYPE  = type(json.loads('{}'))
-  ARRAY_TYPE   = type(json.loads('[]'))
-  STRING_TYPE  = type(json.loads('""'))
-  INT_TYPE     = type(json.loads('0'))
-  FLOAT_TYPE   = type(json.loads('0.0'))
-  BOOLEAN_TYPE = type(json.loads('true'))
-  NULL_TYPE    = type(json.loads('null'))
+  __OBJECT_TYPE  = type(json.loads('{}'))
+  __ARRAY_TYPE   = type(json.loads('[]'))
+  __STRING_TYPE  = type(json.loads('""'))
+  __INT_TYPE     = type(json.loads('0'))
+  __FLOAT_TYPE   = type(json.loads('0.0'))
+  __BOOLEAN_TYPE = type(json.loads('true'))
+  __NULL_TYPE    = type(json.loads('null'))
 
   def __init__(self, path):
     """Read the JSON file with the given path as the schema."""
@@ -48,11 +48,11 @@ class Schema:
 
   def __check(self, checked, unchecked):
     """Throw a SchemaCheckError if the given unchecked JSON data does not match the given checked schema"""
-    if (type(checked) == Schema.OBJECT_TYPE):
+    if (type(checked) == Schema.__OBJECT_TYPE):
       self.__check_object(checked, unchecked)
-    elif (type(checked) == Schema.ARRAY_TYPE):
+    elif (type(checked) == Schema.__ARRAY_TYPE):
       self.__check_array(checked, unchecked)
-    elif (type(checked) == Schema.STRING_TYPE):
+    elif (type(checked) == Schema.__STRING_TYPE):
       self.__check_string(checked, unchecked)
     else:
       self.__logger.error('Unexpected type')
@@ -67,32 +67,32 @@ class Schema:
     BOOLEAN_WILDCARD = '$boolean'
     NULL_WILDCARD    = '$null'
     if (checked == OBJECT_WILDCARD):
-      if (type(unchecked) != Schema.OBJECT_TYPE):
+      if (type(unchecked) != Schema.__OBJECT_TYPE):
         self.__logger.error('Objected expected')
         raise SchemaCheckError('Object expected')
       return
     elif (checked == ARRAY_WILDCARD):
-      if (type(unchecked) != Schema.ARRAY_TYPE):
+      if (type(unchecked) != Schema.__ARRAY_TYPE):
         self.__logger.error('Array expected')
         raise SchemaCheckError('Array expected')
       return
     elif (checked == STRING_WILDCARD):
-      if (type(unchecked) != Schema.STRING_TYPE):
+      if (type(unchecked) != Schema.__STRING_TYPE):
         self.__logger.error('String expected')
         raise SchemaCheckError('String expected')
       return
     elif (checked == NUMBER_WILDCARD):
-      if (not type(unchecked) in (Schema.INT_TYPE, Schema.FLOAT_TYPE)):
+      if (not type(unchecked) in (Schema.__INT_TYPE, Schema.__FLOAT_TYPE)):
         self.__logger.error('Number expected')
         raise SchemaCheckError('Number expected')
       return
     elif (checked == BOOLEAN_WILDCARD):
-      if (type(unchecked) != Schema.BOOLEAN_TYPE):
+      if (type(unchecked) != Schema.__BOOLEAN_TYPE):
         self.__logger.error('Boolean expected')
         raise SchemaCheckError('Boolean expected')
       return
     elif (checked == NULL_WILDCARD):
-      if (type(unchecked) != Schema.NULL_TYPE):
+      if (type(unchecked) != Schema.__NULL_TYPE):
         self.__logger.error('Null expected')
         raise SchemaCheckError('Null expected')
       return
@@ -106,7 +106,7 @@ class Schema:
 
   def __check_object(self, checked, unchecked):
     """Throw a SchemaCheckError if the unchecked JSON data does not match the checked JSON object"""
-    if (type(unchecked) != Schema.OBJECT_TYPE):
+    if (type(unchecked) != Schema.__OBJECT_TYPE):
       self.__logger.error('Object expected')
       raise SchemaCheckError('Object expected')
     if (checked.keys() != unchecked.keys()):
@@ -121,7 +121,7 @@ class Schema:
 
   def __check_array(self, checked, unchecked):
     """Throw a SchemaCheckError if the unchecked JSON data does not match the checked JSON array"""
-    if (type(unchecked) != Schema.ARRAY_TYPE):
+    if (type(unchecked) != Schema.__ARRAY_TYPE):
       self.__logger.error('Array Expected')
     for item in unchecked:
       item_checked = False
