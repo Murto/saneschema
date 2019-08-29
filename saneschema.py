@@ -123,6 +123,7 @@ class Schema:
     """Throw a SchemaCheckError if the unchecked JSON data does not match the checked JSON array"""
     if (type(unchecked) != Schema.__ARRAY_TYPE):
       self.__logger.error('Array Expected')
+      raise SchemaCheckError('Array expected')
     for item in unchecked:
       item_checked = False
       for item_scheme in checked:
