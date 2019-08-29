@@ -53,12 +53,12 @@ class Schema:
     elif (type(checked) == Schema.__ARRAY_TYPE):
       self.__check_array(checked, unchecked)
     elif (type(checked) == Schema.__STRING_TYPE):
-      self.__check_string(checked, unchecked)
+      self.__check_jex(checked, unchecked)
     else:
       self.__logger.error('Unexpected type')
       raise SchemaCheckError('Unexpected type')
 
-  def __check_string(self, checked, unchecked):
+  def __check_jex(self, checked, unchecked):
     """Throw a SchemaCheckError if the unchecked JSON data does not match the JEX"""
     OBJECT_WILDCARD  = '$object'
     ARRAY_WILDCARD   = '$array'
@@ -128,10 +128,11 @@ class Schema:
       item_checked = False
       for item_scheme in checked:
         try:
-          self.__check_string(item_scheme, item)
+          self.__check_jex(item_scheme, item)
           item_checked = True
+          break
         except SchemaCheckError:
           continue
       if (not item_checked):
-        self.__logger.error('Array item does not fit any item schema')
-        raise SchemaCheckError('Array item does not fit any item schema')
+        self.__logger.error(f'Array item \"{json.dumps(item)}\" does not fit any item schema')
+        raise SchemaCheckError(f'Array item \"{json.dumps(item)}\" does not fit any item schema')
