@@ -7,10 +7,11 @@ saneschema checks that a JSON file conforms to a given structure, or schema, whi
 
 ## Installation
 
+The following sections assume that python 3 is your default version of python.
+
 ### PyPi & Pip
 
 Installation with PyPi and Pip is the easier option and will ensure you have the most up to date, stable version
-The following command assumes that python 3 is your default version of python.
 
 ```bash
 pip install saneschema
@@ -19,11 +20,10 @@ pip install saneschema
 ### Git & Pip
 
 Installation with Git and Pip is a bit more work but will ensure you have the most up to date version.
-The following commands assume that python 3 is your default version of python and pip.
 
 ```bash
 git clone https://github.com/Murto/saneschema.git
 cd saneschema
 python setup.py
-pip dist/saneschema-2.0-py3-none-any.whl
+pip dist/*.whl
 ```
