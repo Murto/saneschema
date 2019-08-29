@@ -32,15 +32,50 @@ class Schema:
     try:
       with open(path, 'r') as f:
         self._schema = json.load(f)
+        self.__check_schema(self._schema)
     except IOError:
       self.__logger.error('Error opening JSON schema file')
       raise SchemaCheckError('Error opening JSON schema file')
     except json.JSONDecodeError:
       self.__logger.error('Error decoding JSON schema')
       raise SchemaCheckError('Error decoding JSON schema')
+    except SchemaCheckError:
+      self.__logger.error('Error checking schema')
+      raise
     except:
       self.__logger.error('An unknown error occurred. Please contact the package maintainer')
       raise SchemaCheckError('An Unknown error occurred. Please contact the package maintainer')
+
+  def __check_schema(self, schema):
+    """Throw a SchemaCheckError if the given schema JSON is invalid."""
+    OBJECT_WILDCARD  = '$object'
+    ARRAY_WILDCARD   = '$array'
+    STRING_WILDCARD  = '$string'
+    NUMBER_WILDCARD  = '$number'
+    BOOLEAN_WILDCARD = '$boolean'
+    NULL_WILDCARD    = '$null'
+    WILDCARDS = [OBJECT_WILDCARD, ARRAY_WILDCARD, STRING_WILDCARD, NUMBER_WILDCARD, BOOLEAN_WILDCARD, NULL_WILDCARD]
+    if (type(schema) == Schema.__OBJECT_TYPE):
+      for item in schema.values():
+        self.__check_schema(item)
+    elif (type(schema) == Schema.__ARRAY_TYPE):
+      for item_schema in schema:
+        self.__check_schema(item_schema)
+    elif (type(schema) == Schema.__STRING_TYPE):
+      if (schema in WILDCARDS):
+        return
+      try:
+        jex = json.loads(schema)
+        self.__check_schema(jex)
+      except json.JSONDecodeError:
+        self.__logger.error(f'Error decoding schema JEX "{schema}"')
+        raise SchemaCheckError(f'Error decoding schema JEX "{schema}"')
+      except SchemaCheckError:
+        self.__logger.error(f'Error in schema jex')
+        raise
+    else:
+      self.__logger.error(f'Unexpected type "{type(schema)}" in schema')
+      raise SchemaCheckError(f'Unexpected type "{type(schema)}" in schema')
 
   def check(self, unchecked):
     """Throw a SchemaCheckError if the given unchecked JSON data does not match the schema."""
