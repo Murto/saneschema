@@ -75,7 +75,7 @@ class Schema:
                 raise
         else:
             self.__logger.error(f'Unexpected type "{type(schema)}" in schema')
-        raise SchemaCheckError(f'Unexpected type "{type(schema)}" in schema')
+            raise SchemaCheckError(f'Unexpected type "{type(schema)}" in schema')
 
     def check(self, unchecked):
         """Throw a SchemaCheckError if the given unchecked JSON data does not match the schema."""
